@@ -6,7 +6,7 @@ namespace ToDoIt
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Nothing to see here!");
         }
     }
 }
