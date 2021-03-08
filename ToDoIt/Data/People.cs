@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ToDoIt.Data
 {
-    class People
+    public class People
     {
 
     }
