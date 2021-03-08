@@ -12,9 +12,9 @@ namespace ToDoIt.Model
 
         public Person(int myPersonId, string myFirstName, string myLastName)
         {
-            personId = myPersonId; 
+            personId = myPersonId;
 
-            // have to check for Null or enpty strings
+            // have to check for Null or empty strings
             if (myFirstName != null && myFirstName.Length > 0)
             {
                 firstName = myFirstName;
@@ -24,7 +24,7 @@ namespace ToDoIt.Model
                 firstName = "John";
             }
             
-            // have to check for Null or enpty strings
+            // have to check for Null or empty strings
             if (myLastName != null && myLastName.Length > 0)
             {
                 lastName = myLastName;
