@@ -22,5 +22,23 @@ namespace ToDoIt.Tests.Model
             Assert.Equal(id, todo1.TodoId);
             Assert.Null(todo1.Assignee);
         }
+
+        [Fact]
+        public void ToDoTest_ConstructNoAssignee_GetAssigneeNull()
+        {
+            //arrange
+            string description = "Get to work.";
+            int id = 1;
+            Person expectedPerson = null;
+
+            //act
+            ToDo todo1 = new ToDo(id, description);
+            Person myAssignedPerson = todo1.Assignee;
+
+            //assert
+            Assert.Equal(expectedPerson, myAssignedPerson);
+
+        }
+
     }
 }
