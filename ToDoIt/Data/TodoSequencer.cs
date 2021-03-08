@@ -4,7 +4,19 @@ using System.Text;
 
 namespace ToDoIt.Data
 {
-    class TodoSequencer
+    public static class TodoSequencer
     {
+        private static int todoId = 0;
+
+        public static int NextTodoId()
+        {
+            todoId += 1;
+            return todoId;
+        }
+
+        public static void Reset()
+        {
+            todoId = 0;
+        }
     }
 }
