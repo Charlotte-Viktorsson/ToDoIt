@@ -18,7 +18,7 @@ namespace ToDoIt.Tests.Model
 
             //assert
             Assert.Equal(description, todo1.Description);
-            Assert.Equal(false, todo1.Done);
+            Assert.False(todo1.Done);
             Assert.Equal(id, todo1.TodoId);
             Assert.Null(todo1.Assignee);
         }
