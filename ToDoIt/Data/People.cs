@@ -51,5 +51,11 @@ namespace ToDoIt.Data
             return newPerson;
         }
 
+        public void Clear()
+        {
+            myPeople = new Person[0];
+            // We will keep the uniqe Id still Uniqe
+            //PersonSequencer.reset();
+        }
     }
 }

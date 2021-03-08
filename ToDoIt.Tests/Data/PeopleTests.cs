@@ -47,7 +47,7 @@ namespace ToDoIt.Tests.Data
             //Arrange
             People myPeopleCollection = null;
             Person onePerson = null;
-            int mySecondTotalNrPersons = 0;
+            int myFirstTotalNrPersons = 0;
 
             string myExpectedName = "Abel Jonsson";
 
@@ -55,11 +55,36 @@ namespace ToDoIt.Tests.Data
             myPeopleCollection = new People();
             onePerson = myPeopleCollection.AddPerson("Abel", "Jonsson");
 
-            mySecondTotalNrPersons = myPeopleCollection.Size();
-            onePerson = myPeopleCollection.FindById(mySecondTotalNrPersons);
+            myFirstTotalNrPersons = myPeopleCollection.Size();
+            onePerson = myPeopleCollection.FindById(myFirstTotalNrPersons);
 
             //Assert
             Assert.Equal(myExpectedName, onePerson.Name);
+
+        }
+
+        [Fact]
+        public void Clear_AddPersonsClear_AllGone()
+        {
+            //Arrange
+            People myPeopleCollection = null;
+            int myFirstTotalNrPersons = 0;
+            int mySecondTotalNrPersons = 0;
+            int myExpectedNrOfPersons = 0;
+
+            //Act
+            myPeopleCollection = new People();
+            myPeopleCollection.AddPerson("Abel", "Jonsson");
+            myPeopleCollection.AddPerson("Ronja", "Axelsson");
+            myPeopleCollection.AddPerson("Gottfrid", "Larsson");
+            myFirstTotalNrPersons = myPeopleCollection.Size();
+            myPeopleCollection.Clear();
+            mySecondTotalNrPersons = myPeopleCollection.Size();
+
+
+            //Assert
+            Assert.NotEqual(myFirstTotalNrPersons, mySecondTotalNrPersons);
+            Assert.Equal(myExpectedNrOfPersons, mySecondTotalNrPersons);
 
         }
 
