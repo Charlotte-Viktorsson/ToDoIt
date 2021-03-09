@@ -20,6 +20,51 @@ namespace ToDoIt.Tests.Data
         }
 
         [Fact]
+        public void FindById_CreatePersonsLook4One_FoundOne()
+        {
+            //Arrange
+            PersonSequencer.reset();
+            People myPeopleCollection = new People();
+            int selectedPersonId = 3;
+            Person myLuckyPerson;
+
+            //Act
+            myPeopleCollection.AddPerson("Abel", "Jonsson");
+            myPeopleCollection.AddPerson("Kalle", "Jonson");
+            myPeopleCollection.AddPerson("Nisse", "Johnsson");
+            myPeopleCollection.AddPerson("Robert", "Jönsson");
+
+            myLuckyPerson = myPeopleCollection.FindById(selectedPersonId);
+
+
+            //Assert
+            Assert.Equal(selectedPersonId, myLuckyPerson.PersonId);
+        }
+
+        [Fact]
+        public void FindById_CreatePersonsLook4OneNotTHere_FoundNoone()
+        {
+            //Arrange
+            PersonSequencer.reset();
+            People myPeopleCollection = new People();
+            int selectedPersonId = 3000;
+            Person myLuckyPerson;
+
+            //Act
+            myPeopleCollection.AddPerson("Abel", "Jonsson");
+            myPeopleCollection.AddPerson("Kalle", "Jonson");
+            myPeopleCollection.AddPerson("Nisse", "Johnsson");
+            myPeopleCollection.AddPerson("Robert", "Jönsson");
+
+            myLuckyPerson = myPeopleCollection.FindById(selectedPersonId);
+
+
+            //Assert
+            Assert.Null(myLuckyPerson);
+        }
+
+
+        [Fact]
         public void AddPerson_OnlyOnePersonAdd_OnlyOnePersonIn()
         {
             //Arrange
@@ -91,5 +136,71 @@ namespace ToDoIt.Tests.Data
 
         }
 
+
+        [Fact]
+        public void Remove_AddPersonsRemoveOne_OnlyOneGone()
+        {
+            //Arrange
+            PersonSequencer.reset();
+            People myPeopleCollection = null;
+            int myFirstTotalNrPersons = 0;
+            int mySecondTotalNrPersons = 0;
+            int myExpectedNrOfPersons = 3;
+
+            //Act
+            myPeopleCollection = new People();
+            myPeopleCollection.AddPerson("Abel", "Jonsson");
+            myPeopleCollection.AddPerson("Ronja", "Axelsson");
+            Person myPerson = myPeopleCollection.AddPerson("Gottfrid", "Larsson"); // Delete
+            myPeopleCollection.AddPerson("Sahara", "Hotnight");
+
+
+            myFirstTotalNrPersons = myPeopleCollection.Size();
+
+
+            myPeopleCollection.Remove(myPerson);
+
+            mySecondTotalNrPersons = myPeopleCollection.Size();
+
+
+
+            //Assert
+            Assert.NotEqual(myFirstTotalNrPersons, mySecondTotalNrPersons);
+            Assert.Equal(myExpectedNrOfPersons, mySecondTotalNrPersons);
+
+        }
+
+        [Fact]
+        public void Remove_RemoveOneNotIncluded_NothingRemoved()
+        {
+            //Arrange
+            PersonSequencer.reset();
+            People myPeopleCollection = null;
+            int mySecondTotalNrPersons = 0;
+            int myExpectedNrOfPersons = 4;
+
+            //Act
+            myPeopleCollection = new People();
+            myPeopleCollection.AddPerson("Abel", "Jonsson");
+            myPeopleCollection.AddPerson("Ronja", "Axelsson");
+            myPeopleCollection.AddPerson("Gottfrid", "Larsson");
+            myPeopleCollection.AddPerson("Sahara", "Hotnight");
+
+            Person myPerson = new Person(0, "Per", "Banan"); // Delete
+
+            // myFirstTotalNrPersons = myPeopleCollection.Size();
+
+
+            myPeopleCollection.Remove(myPerson);
+
+            mySecondTotalNrPersons = myPeopleCollection.Size();
+
+
+
+            //Assert
+            //Assert.NotEqual(myFirstTotalNrPersons, mySecondTotalNrPersons);
+            Assert.Equal(myExpectedNrOfPersons, mySecondTotalNrPersons);
+
+        }
     }
 }

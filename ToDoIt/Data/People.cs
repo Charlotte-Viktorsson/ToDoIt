@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ToDoIt.Data;
 using ToDoIt.Model;
 
 namespace ToDoIt.Data
@@ -27,9 +24,41 @@ namespace ToDoIt.Data
 
         public Person FindById(int personId)
         {
-            // What will happen if Id is out of range??
-            return myPeople[personId-1];
+            int myIndex = 0;
+            bool notFound = false;
+            bool justLooking = true;
+            int myCollectionNumber = myPeople.Length;
+
+
+            while (!notFound && justLooking)
+            {
+                if (myPeople[myIndex].PersonId == personId)
+                {
+                    justLooking = false;
+                }
+
+                myIndex++;
+
+                if (myIndex == myCollectionNumber)
+                {
+                    notFound = true;
+                }
+            }
+
+            if (notFound)
+            {
+                return null;
+            }
+            else
+            {
+                return myPeople[myIndex - 1];
+
+            }
+
         }
+
+
+
 
         /// <summary>
         /// AddPerson creates a new person and inserts it into the existing array of
@@ -57,5 +86,38 @@ namespace ToDoIt.Data
             // We will keep the uniqe Id still Uniqe
             //PersonSequencer.reset();
         }
+
+        public void Remove(Person myPerson)
+        {
+            int myPeopleCollection = myPeople.Length;
+            int myIndexedPerson = -1;
+            bool notDone = true;
+            int myLoop = 0;
+
+            do
+            {
+                if (myPeople[myLoop].PersonId == myPerson.PersonId)
+                {
+                    notDone = false;
+                    myIndexedPerson = myLoop;
+                }
+                myLoop++;
+                if (myLoop == myPeopleCollection) notDone = false;
+
+            } while (notDone);
+
+
+            if (myIndexedPerson > -1)
+            {
+
+                for (int removeLoop = myIndexedPerson; removeLoop < myPeopleCollection - 1; removeLoop++)
+                {
+                    myPeople[removeLoop] = myPeople[removeLoop + 1];
+                }
+                Array.Resize(ref myPeople, myPeopleCollection - 1);
+            }
+
+        }
+
     }
 }

@@ -1,7 +1,6 @@
-﻿using System;
-using Xunit;
-using ToDoIt.Data;
+﻿using ToDoIt.Data;
 using ToDoIt.Model;
+using Xunit;
 
 namespace ToDoIt.Tests.Data
 {
@@ -116,7 +115,7 @@ namespace ToDoIt.Tests.Data
             todoItems.AddToDoItem(assignee, description1);
             todoItems.AddToDoItem(assignee, description2);
             int size = todoItems.Size();
-            
+
             //act
             ToDo foundItem = todoItems.FindById(size);
 
@@ -127,7 +126,7 @@ namespace ToDoIt.Tests.Data
         [Fact]
         public void FindByDoneStatus_FindOnlyOne_Arraysize1()
         {
-           //arrange
+            //arrange
             int personId = PersonSequencer.nextPersonId();
             string firstName = "Fredrik";
             string familyName = "Persson";
@@ -282,6 +281,75 @@ namespace ToDoIt.Tests.Data
             //assert
             Assert.Single(foundItemsArray);
             Assert.Equal(description3, foundItemsArray[0].Description);
+        }
+
+
+        [Fact]
+        public void Remove_RemoveOne_RemoveOnlyOne()
+        {
+            //arrange
+
+            ToDo myToDo = null;
+            string description1 = "Gå ut med hunden";
+            string description2 = "Kela med katten";
+            string description3 = "Promenera";
+            string description4 = "Läxor";
+            int expectedNumberOfItems = 3;
+
+            TodoSequencer.Reset();
+            ToDoItems todoItems = new ToDoItems();
+            todoItems.Clear();
+
+            //add 4 items
+            int myInitialNumber = todoItems.Size();
+            todoItems.AddToDoItem(null, description1);
+            todoItems.AddToDoItem(null, description2);
+            myToDo = todoItems.AddToDoItem(null, description3);
+            todoItems.AddToDoItem(null, description4);
+
+
+
+            //act
+            todoItems.Remove(myToDo);
+            int myAdjustedNumber = todoItems.Size();
+
+            //assert
+            Assert.NotEqual(myInitialNumber, myAdjustedNumber);
+            Assert.Equal(expectedNumberOfItems, myAdjustedNumber);
+        }
+
+        [Fact]
+        public void Remove_RemoveOneNotIncluded_RemoveNothing()
+        {
+            //arrange
+
+            ToDo myToDo = null;
+            string description1 = "Gå ut med hunden";
+            string description2 = "Kela med katten";
+            string description3 = "Promenera";
+            string description4 = "Läxor";
+            int expectedNumberOfItems = 4;
+
+            TodoSequencer.Reset();
+            ToDoItems todoItems = new ToDoItems();
+            todoItems.Clear();
+
+            //add 4 items
+
+            todoItems.AddToDoItem(null, description1);
+            todoItems.AddToDoItem(null, description2);
+            todoItems.AddToDoItem(null, description3);
+            todoItems.AddToDoItem(null, description4);
+
+            myToDo = new ToDo(0, "Självdö");
+
+            //act
+            todoItems.Remove(myToDo);
+            int myAdjustedNumber = todoItems.Size();
+
+            //assert
+            //Assert.NotEqual(myInitialNumber, myAdjustedNumber);
+            Assert.Equal(myAdjustedNumber, expectedNumberOfItems);
         }
     }
 }

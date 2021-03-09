@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using ToDoIt.Model;
 
 namespace ToDoIt.Data
@@ -63,8 +62,8 @@ namespace ToDoIt.Data
         public ToDo FindById(int todoId)
         {
             int returnIndex = -1;
-            
-            for(int i = 0; i < myItems.Length; i++)
+
+            for (int i = 0; i < myItems.Length; i++)
             {
                 if (myItems[i].TodoId == todoId)
                 {
@@ -78,19 +77,20 @@ namespace ToDoIt.Data
             else
             {
                 return null;
-            } 
-            
+            }
+
         }
 
         /// <summary>
         /// The method creates a new empty list of ToDo items.
         /// </summary>
-        public void Clear() 
+        public void Clear()
         {
             myItems = new ToDo[0];
         }
 
-        public ToDo[] FindByDoneStatus(bool doneStatus) {
+        public ToDo[] FindByDoneStatus(bool doneStatus)
+        {
 
             ToDo[] returnArray = new ToDo[0];
             List<ToDo> returnList = new List<ToDo>();
@@ -147,7 +147,7 @@ namespace ToDoIt.Data
             }
             return returnArray;
         }
-        
+
         public ToDo[] FindUnassignedTodoItems()
         {
             ToDo[] returnArray = new ToDo[0];
@@ -165,6 +165,47 @@ namespace ToDoIt.Data
                 }
             }
             return returnArray;
+        }
+
+        public void Remove(ToDo myToDo)
+        {
+            int myToDoCollection = myItems.Length;
+            int myIndexedToDo = -1;
+            bool notDoneYet = true;
+
+            //for (int myLoop = 0; (myItems[myLoop].TodoId != myToDo.TodoId) && (myLoop < myToDoCollection-1); myLoop++)
+            //{
+            //    if (myItems[myLoop].TodoId == myToDo.TodoId)
+            //    {
+            //        myIndexedToDo = myLoop;
+            //    }
+            //}
+            int myLoop = 0;
+            while (notDoneYet)
+            {
+
+                if (myItems[myLoop].TodoId == myToDo.TodoId)
+                {
+                    myIndexedToDo = myLoop;
+                    notDoneYet = false;
+                }
+                myLoop++;
+
+                if (myLoop == myToDoCollection)
+                {
+                    notDoneYet = false;
+                }
+            }
+
+            if (myIndexedToDo != -1)
+            {
+                for (int removeLoop = myIndexedToDo; removeLoop < myToDoCollection - 1; removeLoop++)
+                {
+                    myItems[removeLoop] = myItems[removeLoop + 1];
+                }
+
+                Array.Resize(ref myItems, myToDoCollection - 1);
+            }
         }
 
     }
