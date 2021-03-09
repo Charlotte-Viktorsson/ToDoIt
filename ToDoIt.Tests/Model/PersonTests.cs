@@ -7,7 +7,7 @@ namespace ToDoIt.Tests
     public class PersonTests
     {
         [Fact]
-        public void PersonCreateValidNames()
+        public void Person_CreateValidPerson_NamesOk()
         {
             int myPersonID = 0;
             string myFirstName = "Bosse";
@@ -23,7 +23,7 @@ namespace ToDoIt.Tests
 
 
         [Fact]
-        public void PersonCreateInValidNames()
+        public void Person_CreateEmptyPersonName_GetEmptyStandardName()
         {
             int myPersonID = 0;
             string myFirstName = "";
@@ -38,7 +38,7 @@ namespace ToDoIt.Tests
         }
 
         [Fact]
-        public void PersonCreateNullLastName()
+        public void Person_CreateNullLastName_GetEmptyStandardName()
         {
             int myPersonID = 0;
             string myFirstName = "Bosse";
@@ -53,14 +53,14 @@ namespace ToDoIt.Tests
         }
 
         [Fact]
-        public void PersonCreateID()
+        public void Person_CreateID_IdOk()
         {
             int myPersonID = 0;
             string myFirstName = "Bosse";
             string myLastName = "Larsson";
             int myIdResult = 0;
 
-            PersonSequencer.reset();
+
             Person myPerson = new Person(myPersonID, myFirstName, myLastName);
 
             // Assert
