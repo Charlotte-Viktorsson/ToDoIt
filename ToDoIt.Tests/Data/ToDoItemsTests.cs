@@ -9,14 +9,14 @@ namespace ToDoIt.Tests.Data
     {
 
         [Fact]
-        public void clearToDoItemsTest()
+        public void Clear_clearList_zero()
         {
             //arrange
             int expectedSizeOfToDoItems = 0;
             string description = "Tvätta kläder";
 
             ToDoItems todoItems = new ToDoItems();
-            ToDo returnedTodo = todoItems.CreateToDoItem(null, description);
+            ToDo returnedTodo = todoItems.AddToDoItem(null, description);
             Assert.Equal(1, todoItems.Size());
 
             //act
@@ -28,7 +28,7 @@ namespace ToDoIt.Tests.Data
         }
 
         [Fact]
-        public void createTodoItemWithAssigneeTest()
+        public void AddTodoItem_WithAssignee_sizeCorrect_descriptionCorrect()
         {
             //arrange
             int personId = PersonSequencer.nextPersonId();
@@ -41,7 +41,7 @@ namespace ToDoIt.Tests.Data
             ToDoItems todoItems = new ToDoItems();
 
             //act
-            ToDo returnedTodo = todoItems.CreateToDoItem(assignee, description);
+            ToDo returnedTodo = todoItems.AddToDoItem(assignee, description);
 
             //assert
             Assert.Equal(expectedSizeOfToDoItems, todoItems.Size());
@@ -49,7 +49,7 @@ namespace ToDoIt.Tests.Data
         }
 
         [Fact]
-        public void createTodoItemWithoutAssigneeTest()
+        public void AddTodoItem_WithoutAssignee_SizeDescription()
         {
             //arrange
             Person assignee = null;
@@ -60,7 +60,7 @@ namespace ToDoIt.Tests.Data
             todoItems.Clear();
 
             //act
-            ToDo returnedTodo = todoItems.CreateToDoItem(assignee, description);
+            ToDo returnedTodo = todoItems.AddToDoItem(assignee, description);
 
             //assert
             Assert.Equal(expectedSizeOfToDoItems, todoItems.Size());
@@ -68,7 +68,7 @@ namespace ToDoIt.Tests.Data
         }
 
         [Fact]
-        public void FindAllItemsTest()
+        public void FindAllItems_findsAll_arraySize()
         {
             //arrange
             int personId = PersonSequencer.nextPersonId();
@@ -85,9 +85,9 @@ namespace ToDoIt.Tests.Data
             todoItems.Clear();
 
             //add 3 items
-            todoItems.CreateToDoItem(assignee, description1);
-            todoItems.CreateToDoItem(assignee, description2);
-            todoItems.CreateToDoItem(null, description3);
+            todoItems.AddToDoItem(assignee, description1);
+            todoItems.AddToDoItem(assignee, description2);
+            todoItems.AddToDoItem(null, description3);
 
             //act
             ToDo[] itemArray = todoItems.FindAll();
@@ -97,7 +97,7 @@ namespace ToDoIt.Tests.Data
         }
 
         [Fact]
-        public void FindItemByIdTest()
+        public void FindItemById_return1_description()
         {
             //arrange
             int personId = PersonSequencer.nextPersonId();
@@ -108,14 +108,15 @@ namespace ToDoIt.Tests.Data
             string description1 = "Gå ut med hunden";
             string description2 = "Kela med katten";
 
+            TodoSequencer.Reset();
             ToDoItems todoItems = new ToDoItems();
             todoItems.Clear();
 
             //add 2 items
-            todoItems.CreateToDoItem(assignee, description1);
-            todoItems.CreateToDoItem(assignee, description2);
+            todoItems.AddToDoItem(assignee, description1);
+            todoItems.AddToDoItem(assignee, description2);
             int size = todoItems.Size();
-
+            
             //act
             ToDo foundItem = todoItems.FindById(size);
 

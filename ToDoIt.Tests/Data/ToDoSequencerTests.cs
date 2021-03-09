@@ -7,7 +7,7 @@ namespace ToDoIt.Tests.Data
     public class ToDoSequencerTests
     {
         [Fact]
-        public void GetNextTodoIdTest()
+        public void NextTodoId_getNextTodoId_id()
         {
             //arrange
             TodoSequencer.Reset();
@@ -20,7 +20,7 @@ namespace ToDoIt.Tests.Data
         }
 
         [Fact]
-        public void ResetTodoIdTest()
+        public void Reset_ResetId_NextToDoId()
         {
             //arrange
             TodoSequencer.Reset();
@@ -28,14 +28,15 @@ namespace ToDoIt.Tests.Data
             // consume 2 id's
             int nextId = TodoSequencer.NextTodoId();
             nextId = TodoSequencer.NextTodoId();
-            Assert.Equal(2, nextId);
+            
 
             //act
             TodoSequencer.Reset();
-            nextId = TodoSequencer.NextTodoId();
+            int newId = TodoSequencer.NextTodoId();
 
             //assert
-            Assert.Equal(expectedResetId, nextId);
+            Assert.NotEqual(nextId, newId);
+            Assert.Equal(expectedResetId, newId);
         }
     }
 }

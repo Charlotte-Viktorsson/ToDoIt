@@ -8,11 +8,11 @@ namespace ToDoIt.Data
 
     public class ToDoItems
     {
-        private static ToDo[] items;
+        private static ToDo[] myItems;
 
         public ToDoItems()
         {
-            items = new ToDo[0];
+            myItems = new ToDo[0];
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace ToDoIt.Data
         /// <returns>int size</returns>
         public int Size()
         {
-            return items.Length;
+            return myItems.Length;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace ToDoIt.Data
         /// <returns>ToDo[]</returns>
         public ToDo[] FindAll()
         {
-            return items;
+            return myItems;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace ToDoIt.Data
         /// <param name="assignee"></param>
         /// <param name="description"></param>
         /// <returns>Returns the object of the created ToDo item</returns>
-        public ToDo CreateToDoItem(Person assignee, string description)
+        public ToDo AddToDoItem(Person assignee, string description)
         {
             int nextItemId = TodoSequencer.NextTodoId();
 
@@ -49,8 +49,8 @@ namespace ToDoIt.Data
 
             //extend array by one.
             int arrayLength = this.Size();
-            Array.Resize(ref items, arrayLength + 1);
-            items[arrayLength] = newTodo;
+            Array.Resize(ref myItems, arrayLength + 1);
+            myItems[arrayLength] = newTodo;
 
             return newTodo;
         }
@@ -64,16 +64,16 @@ namespace ToDoIt.Data
         {
             int returnIndex = -1;
             
-            for(int i = 0; i < items.Length; i++)
+            for(int i = 0; i < myItems.Length; i++)
             {
-                if (items[i].TodoId == todoId)
+                if (myItems[i].TodoId == todoId)
                 {
                     returnIndex = i;
                 }
             }
             if (returnIndex != -1)
             {
-                return items[returnIndex];
+                return myItems[returnIndex];
             }
             else
             {
@@ -87,7 +87,7 @@ namespace ToDoIt.Data
         /// </summary>
         public void Clear() 
         {
-            items = new ToDo[0];
+            myItems = new ToDo[0];
         }
 
         /*public ToDo[] FindByDoneStatus(bool doneStatus) {

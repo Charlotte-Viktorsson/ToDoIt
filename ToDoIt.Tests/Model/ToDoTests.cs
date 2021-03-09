@@ -7,7 +7,7 @@ namespace ToDoIt.Tests.Model
     public class ToDoTests
     {
         [Fact]
-        public void CreateToDoTest()
+        public void Create_constructor_checkAllFields()
         {
             //arrange
             string description = "baka kaka";
