@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ToDoIt.Model
+﻿namespace ToDoIt.Model
 {
     public class Person
     {
@@ -10,6 +6,13 @@ namespace ToDoIt.Model
         private string firstName;
         private string lastName;
 
+        /// <summary>
+        /// Person is constructor for a Person. Sets up a persons initial
+        /// values. If no name input, a default name will be assigned to person.
+        /// </summary>
+        /// <param name="myPersonId">The unique Id for this person.</param>
+        /// <param name="myFirstName">The first name of this person.</param>
+        /// <param name="myLastName">The last or family name of this person.</param>
         public Person(int myPersonId, string myFirstName, string myLastName)
         {
             personId = myPersonId;
@@ -23,7 +26,7 @@ namespace ToDoIt.Model
             {
                 firstName = "John";
             }
-            
+
             // have to check for Null or empty strings
             if (myLastName != null && myLastName.Length > 0)
             {
@@ -34,15 +37,23 @@ namespace ToDoIt.Model
                 lastName = "Doe";
             };
 
-            
+
         }
 
-        public string Name {
+        /// <summary>
+        /// A get full name of this person.
+        /// </summary>
+        public string Name
+        {
             get { return firstName + " " + lastName; }
         }
 
-        public int PersonId {
-            get { return personId;  }
+        /// <summary>
+        /// A get personal Id from this person.
+        /// </summary>
+        public int PersonId
+        {
+            get { return personId; }
         }
 
     }

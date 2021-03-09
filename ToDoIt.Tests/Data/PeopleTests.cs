@@ -151,17 +151,14 @@ namespace ToDoIt.Tests.Data
             myPeopleCollection = new People();
             myPeopleCollection.AddPerson("Abel", "Jonsson");
             myPeopleCollection.AddPerson("Ronja", "Axelsson");
-            Person myPerson = myPeopleCollection.AddPerson("Gottfrid", "Larsson"); // Delete
+            Person myPerson = myPeopleCollection.AddPerson("Gottfrid", "Larsson"); // Delete this person
             myPeopleCollection.AddPerson("Sahara", "Hotnight");
 
 
             myFirstTotalNrPersons = myPeopleCollection.Size();
-
-
             myPeopleCollection.Remove(myPerson);
 
             mySecondTotalNrPersons = myPeopleCollection.Size();
-
 
 
             //Assert
@@ -186,15 +183,11 @@ namespace ToDoIt.Tests.Data
             myPeopleCollection.AddPerson("Gottfrid", "Larsson");
             myPeopleCollection.AddPerson("Sahara", "Hotnight");
 
-            Person myPerson = new Person(0, "Per", "Banan"); // Delete
-
-            // myFirstTotalNrPersons = myPeopleCollection.Size();
-
+            Person myPerson = new Person(0, "Per", "Banan");    // Delete this person
 
             myPeopleCollection.Remove(myPerson);
 
             mySecondTotalNrPersons = myPeopleCollection.Size();
-
 
 
             //Assert

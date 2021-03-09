@@ -7,21 +7,38 @@ namespace ToDoIt.Data
     {
         private static Person[] myPeople;
 
+        /// <summary>
+        /// The constructor of the people collection allocates a new array of no persons inside.
+        /// </summary>
         public People()
         {
             myPeople = new Person[0];
         }
 
+        /// <summary>
+        /// Size gives you the number of persons in the collecction.
+        /// </summary>
+        /// <returns>Returns an int representing the number of persons in the collection.</returns>
         public int Size()
         {
             return myPeople.Length;
         }
 
+        /// <summary>
+        /// FindAll will give you the array of the collection of peoples.
+        /// </summary>
+        /// <returns>Returns the stored Array of persons.</returns>
         public Person[] FindAll()
         {
             return myPeople;
         }
 
+
+        /// <summary>
+        /// FindById finds your person in the array based on its personId.
+        /// </summary>
+        /// <param name="personId">The unique id of a person in the Array collection of people.</param>
+        /// <returns>Returns the found person. If Id is not in collection return value is null.</returns>
         public Person FindById(int personId)
         {
             int myIndex = 0;
@@ -80,13 +97,20 @@ namespace ToDoIt.Data
             return newPerson;
         }
 
+        /// <summary>
+        /// Clear method discards the old collection of people and creates a new empty one.
+        /// Note that the Id handler will also reset!
+        /// </summary>
         public void Clear()
         {
             myPeople = new Person[0];
-            // We will keep the uniqe Id still Uniqe
-            //PersonSequencer.reset();
+            PersonSequencer.reset();
         }
 
+        /// <summary>
+        /// Remove erases a person in the Array collection. The array is adjusted in length.
+        /// </summary>
+        /// <param name="myPerson">The person to erase in the collection.</param>
         public void Remove(Person myPerson)
         {
             int myPeopleCollection = myPeople.Length;

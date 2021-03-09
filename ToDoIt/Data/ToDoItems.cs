@@ -15,7 +15,7 @@ namespace ToDoIt.Data
         }
 
         /// <summary>
-        /// returns the size of the items list
+        /// Size returns the size of the Array collection.
         /// </summary>
         /// <returns>int size</returns>
         public int Size()
@@ -57,8 +57,8 @@ namespace ToDoIt.Data
         /// <summary>
         /// The method returns the ToDo item with the requested Id
         /// </summary>
-        /// <param name="todoId"></param>
-        /// <returns>Returns the ToDo item if found</returns>
+        /// <param name="todoId">The unique ToDo identification number.</param>
+        /// <returns>Returns the ToDo item if found. Otherwise returns null.</returns>
         public ToDo FindById(int todoId)
         {
             int returnIndex = -1;
@@ -109,6 +109,13 @@ namespace ToDoIt.Data
             return returnArray;
         }
 
+
+        /// <summary>
+        /// Finds all ToDo items by the assigned person based on the personal Id.
+        /// </summary>
+        /// <param name="personId">The unique Id of a person in the array collection.</param>
+        /// <returns>Returns all ToDo items assigned to the specified person in an Array.
+        /// If person do not have assignment the return array is empty.</returns>
         public ToDo[] FindByAssignee(int personId)
         {
             ToDo[] returnArray = new ToDo[0];
@@ -129,6 +136,12 @@ namespace ToDoIt.Data
             return returnArray;
         }
 
+        /// <summary>
+        /// Finds all ToDo items by the assigned person based on the personal object.
+        /// </summary>
+        /// <param name="assignee">The person input is an object of Person contained in the collection.</param>
+        /// <returns>Returns all ToDo items assigned to the specified person in an Array.
+        /// If person do not have assignment the return array is empty.</returns>
         public ToDo[] FindByAssignee(Person assignee)
         {
             ToDo[] returnArray = new ToDo[0];
@@ -148,6 +161,11 @@ namespace ToDoIt.Data
             return returnArray;
         }
 
+        /// <summary>
+        /// Looks upp all the ToDo items that are not assigned.
+        /// </summary>
+        /// <returns>Returns an Array of unassigned ToDos. If no unassigned
+        /// ToDos is found the returned Array is empty.</returns>
         public ToDo[] FindUnassignedTodoItems()
         {
             ToDo[] returnArray = new ToDo[0];
@@ -167,19 +185,18 @@ namespace ToDoIt.Data
             return returnArray;
         }
 
+        /// <summary>
+        /// Remove takes one specified object of ToDo out of the Array
+        /// collection and resizes the remainding Array acordingly.
+        /// </summary>
+        /// <param name="myToDo">The ToDo object to remove from Array
+        /// Collection. If not found notheing will happen.</param>
         public void Remove(ToDo myToDo)
         {
             int myToDoCollection = myItems.Length;
             int myIndexedToDo = -1;
             bool notDoneYet = true;
 
-            //for (int myLoop = 0; (myItems[myLoop].TodoId != myToDo.TodoId) && (myLoop < myToDoCollection-1); myLoop++)
-            //{
-            //    if (myItems[myLoop].TodoId == myToDo.TodoId)
-            //    {
-            //        myIndexedToDo = myLoop;
-            //    }
-            //}
             int myLoop = 0;
             while (notDoneYet)
             {
