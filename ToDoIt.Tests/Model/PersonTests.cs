@@ -1,6 +1,6 @@
-using System;
-using Xunit;
+using ToDoIt.Data;
 using ToDoIt.Model;
+using Xunit;
 
 namespace ToDoIt.Tests
 {
@@ -13,13 +13,13 @@ namespace ToDoIt.Tests
             string myFirstName = "Bosse";
             string myLastName = "Larsson";
             string myNameResult = "Bosse Larsson";
-
+            PersonSequencer.reset();
             Person myPerson = new Person(myPersonID, myFirstName, myLastName);
 
             // Assert
-            Assert.Equal(myNameResult , myPerson.Name);
+            Assert.Equal(myNameResult, myPerson.Name);
         }
-    
+
 
 
         [Fact]
@@ -30,6 +30,7 @@ namespace ToDoIt.Tests
             string myLastName = "Larsson";
             string myNameResult = "John Larsson";
 
+            PersonSequencer.reset();
             Person myPerson = new Person(myPersonID, myFirstName, myLastName);
 
             // Assert
@@ -44,6 +45,7 @@ namespace ToDoIt.Tests
             string myLastName = null;
             string myNameResult = "Bosse Doe";
 
+            PersonSequencer.reset();
             Person myPerson = new Person(myPersonID, myFirstName, myLastName);
 
             // Assert
@@ -57,8 +59,8 @@ namespace ToDoIt.Tests
             string myFirstName = "Bosse";
             string myLastName = "Larsson";
             int myIdResult = 0;
-         
 
+            PersonSequencer.reset();
             Person myPerson = new Person(myPersonID, myFirstName, myLastName);
 
             // Assert

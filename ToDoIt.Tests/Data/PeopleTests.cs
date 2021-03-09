@@ -1,7 +1,6 @@
-﻿using System;
-using Xunit;
-using ToDoIt.Data;
+﻿using ToDoIt.Data;
 using ToDoIt.Model;
+using Xunit;
 
 namespace ToDoIt.Tests.Data
 {
@@ -11,6 +10,7 @@ namespace ToDoIt.Tests.Data
         public void Person_ConstructorGetSize_Zero()
         {
             //Arrange
+            PersonSequencer.reset();
             People myPeopleCollection = new People();
             int expectedSizeOfPeople = 0;
             //Act
@@ -23,6 +23,7 @@ namespace ToDoIt.Tests.Data
         public void AddPerson_OnlyOnePersonAdd_OnlyOnePersonIn()
         {
             //Arrange
+            PersonSequencer.reset();
             People myPeopleCollection = null;
             int myFirstTotalNrPersons = 0;
             Person onePerson = null;
@@ -45,6 +46,7 @@ namespace ToDoIt.Tests.Data
         public void AddPerson_OnlyOnPersonAdd_DataInPersonRight()
         {
             //Arrange
+            PersonSequencer.reset();
             People myPeopleCollection = null;
             Person onePerson = null;
             int myFirstTotalNrPersons = 0;
@@ -67,6 +69,7 @@ namespace ToDoIt.Tests.Data
         public void Clear_AddPersonsClear_AllGone()
         {
             //Arrange
+            PersonSequencer.reset();
             People myPeopleCollection = null;
             int myFirstTotalNrPersons = 0;
             int mySecondTotalNrPersons = 0;

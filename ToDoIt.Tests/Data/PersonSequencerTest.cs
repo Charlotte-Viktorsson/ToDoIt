@@ -1,6 +1,5 @@
-﻿using System;
+﻿using ToDoIt.Data;
 using Xunit;
-using ToDoIt.Data;
 
 namespace ToDoIt.Tests.Data
 {
@@ -11,6 +10,7 @@ namespace ToDoIt.Tests.Data
         {
             //Arrange
             int expectedId = 1;
+            PersonSequencer.reset();
             //Act
             int getId = PersonSequencer.nextPersonId();
             // Assert
@@ -22,6 +22,7 @@ namespace ToDoIt.Tests.Data
         {
             //Arrange
             int expectedId = 3;
+            PersonSequencer.reset();
             //Act
             int getId = PersonSequencer.nextPersonId();
             getId = PersonSequencer.nextPersonId();
@@ -35,6 +36,7 @@ namespace ToDoIt.Tests.Data
         {
             //Arrange
             int expectedId = 1;
+            PersonSequencer.reset();
             //Act
             int getId = PersonSequencer.nextPersonId();
             getId = PersonSequencer.nextPersonId();
