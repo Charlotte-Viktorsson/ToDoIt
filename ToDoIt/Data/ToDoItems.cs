@@ -90,23 +90,82 @@ namespace ToDoIt.Data
             myItems = new ToDo[0];
         }
 
-        /*public ToDo[] FindByDoneStatus(bool doneStatus) {
-            
+        public ToDo[] FindByDoneStatus(bool doneStatus) {
+
+            ToDo[] returnArray = new ToDo[0];
+            List<ToDo> returnList = new List<ToDo>();
+
+
+            for (int i = 0; i < myItems.Length; i++)
+            {
+                if (myItems[i].Done == doneStatus)
+                {
+                    int arrayLength = returnArray.Length;
+                    Array.Resize(ref returnArray, arrayLength + 1);
+
+                    returnArray[arrayLength] = myItems[i];
+                }
+            }
+            return returnArray;
         }
 
         public ToDo[] FindByAssignee(int personId)
         {
+            ToDo[] returnArray = new ToDo[0];
+            List<ToDo> returnList = new List<ToDo>();
 
+
+            for (int i = 0; i < myItems.Length; i++)
+            {
+                if (myItems[i].Assignee != null &&
+                    myItems[i].Assignee.PersonId == personId)
+                {
+                    int arrayLength = returnArray.Length;
+                    Array.Resize(ref returnArray, arrayLength + 1);
+
+                    returnArray[arrayLength] = myItems[i];
+                }
+            }
+            return returnArray;
         }
 
         public ToDo[] FindByAssignee(Person assignee)
         {
+            ToDo[] returnArray = new ToDo[0];
+            List<ToDo> returnList = new List<ToDo>();
 
+
+            for (int i = 0; i < myItems.Length; i++)
+            {
+                if (myItems[i].Assignee == assignee)
+                {
+                    int arrayLength = returnArray.Length;
+                    Array.Resize(ref returnArray, arrayLength + 1);
+
+                    returnArray[arrayLength] = myItems[i];
+                }
+            }
+            return returnArray;
         }
+        
         public ToDo[] FindUnassignedTodoItems()
         {
+            ToDo[] returnArray = new ToDo[0];
+            List<ToDo> returnList = new List<ToDo>();
 
-        }*/
+
+            for (int i = 0; i < myItems.Length; i++)
+            {
+                if (myItems[i].Assignee == null)
+                {
+                    int arrayLength = returnArray.Length;
+                    Array.Resize(ref returnArray, arrayLength + 1);
+
+                    returnArray[arrayLength] = myItems[i];
+                }
+            }
+            return returnArray;
+        }
 
     }
 }

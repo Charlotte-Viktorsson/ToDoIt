@@ -123,5 +123,165 @@ namespace ToDoIt.Tests.Data
             //assert
             Assert.Equal(description2, foundItem.Description);
         }
+
+        [Fact]
+        public void FindByDoneStatus_FindOnlyOne_Arraysize1()
+        {
+           //arrange
+            int personId = PersonSequencer.nextPersonId();
+            string firstName = "Fredrik";
+            string familyName = "Persson";
+            Person assignee = new Person(personId, firstName, familyName);
+
+            string description1 = "Gå ut med hunden";
+            string description2 = "Kela med katten";
+
+            TodoSequencer.Reset();
+            ToDoItems todoItems = new ToDoItems();
+            todoItems.Clear();
+
+            //add 2 items
+            todoItems.AddToDoItem(assignee, description1);
+            todoItems.AddToDoItem(assignee, description2);
+
+            //set one item to done.
+            ToDo itemToBeDone = todoItems.FindById(1);
+            itemToBeDone.Done = true;
+
+            //act
+            ToDo[] foundItemsArray = todoItems.FindByDoneStatus(true);
+
+            //assert
+            Assert.Single(foundItemsArray);
+            Assert.Equal(description1, foundItemsArray[0].Description);
+        }
+
+        [Fact]
+        public void FindByDoneStatus_FindOnlyNotDone_Arraysize2()
+        {
+            //arrange
+            int personId = PersonSequencer.nextPersonId();
+            string firstName = "Fredrik";
+            string familyName = "Persson";
+            Person assignee = new Person(personId, firstName, familyName);
+
+            string description1 = "Gå ut med hunden";
+            string description2 = "Kela med katten";
+            string description3 = "Promenera";
+
+            TodoSequencer.Reset();
+            ToDoItems todoItems = new ToDoItems();
+            todoItems.Clear();
+
+            //add 3 items
+            todoItems.AddToDoItem(assignee, description1);
+            todoItems.AddToDoItem(assignee, description2);
+            todoItems.AddToDoItem(assignee, description3);
+
+            //set one item to done.
+            ToDo itemToBeDone = todoItems.FindById(1);
+            itemToBeDone.Done = true;
+
+            //act
+            ToDo[] foundItemsArray = todoItems.FindByDoneStatus(false);
+
+            //assert
+            Assert.Equal(2, foundItemsArray.Length);
+
+        }
+
+        [Fact]
+        public void FindByAssigneeInt_FindTwo_Arraysize2()
+        {
+            //arrange
+            int personId = PersonSequencer.nextPersonId();
+            string firstName = "Fredrik";
+            string familyName = "Persson";
+            Person assignee = new Person(personId, firstName, familyName);
+
+            string description1 = "Gå ut med hunden";
+            string description2 = "Kela med katten";
+            string description3 = "Promenera";
+
+            TodoSequencer.Reset();
+            ToDoItems todoItems = new ToDoItems();
+            todoItems.Clear();
+
+            //add 3 items
+            todoItems.AddToDoItem(assignee, description1);
+            todoItems.AddToDoItem(assignee, description2);
+            todoItems.AddToDoItem(null, description3);
+
+            //act
+            ToDo[] foundItemsArray = todoItems.FindByAssignee(personId);
+
+            //assert
+            Assert.Equal(2, foundItemsArray.Length);
+        }
+
+        [Fact]
+        public void FindByAssigneePerson_FindOnlyOne_Arraysize1()
+        {
+            //arrange
+            int personId = PersonSequencer.nextPersonId();
+            string firstName = "Fredrik";
+            string familyName = "Persson";
+            Person assignee = new Person(personId, firstName, familyName);
+
+            personId = PersonSequencer.nextPersonId();
+            Person assignee2 = new Person(personId, "Klara", familyName);
+
+            string description1 = "Gå ut med hunden";
+            string description2 = "Kela med katten";
+            string description3 = "Promenera";
+
+            TodoSequencer.Reset();
+            ToDoItems todoItems = new ToDoItems();
+            todoItems.Clear();
+
+            //add 3 items
+            todoItems.AddToDoItem(assignee, description1);
+            todoItems.AddToDoItem(assignee2, description2);
+            todoItems.AddToDoItem(null, description3);
+
+            //act
+            ToDo[] foundItemsArray = todoItems.FindByAssignee(assignee);
+
+            //assert
+            Assert.Single(foundItemsArray);
+        }
+
+        [Fact]
+        public void FindUnassigned_FindOnlyOne_Arraysize1()
+        {
+            //arrange
+            int personId = PersonSequencer.nextPersonId();
+            string firstName = "Fredrik";
+            string familyName = "Persson";
+            Person assignee = new Person(personId, firstName, familyName);
+
+            personId = PersonSequencer.nextPersonId();
+            Person assignee2 = new Person(personId, "Klara", familyName);
+
+            string description1 = "Gå ut med hunden";
+            string description2 = "Kela med katten";
+            string description3 = "Promenera";
+
+            TodoSequencer.Reset();
+            ToDoItems todoItems = new ToDoItems();
+            todoItems.Clear();
+
+            //add 3 items
+            todoItems.AddToDoItem(assignee, description1);
+            todoItems.AddToDoItem(assignee2, description2);
+            todoItems.AddToDoItem(null, description3);
+
+            //act
+            ToDo[] foundItemsArray = todoItems.FindUnassignedTodoItems();
+
+            //assert
+            Assert.Single(foundItemsArray);
+            Assert.Equal(description3, foundItemsArray[0].Description);
+        }
     }
 }
