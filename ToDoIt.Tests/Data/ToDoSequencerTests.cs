@@ -1,6 +1,5 @@
-﻿using System;
+﻿using ToDoIt.Data;
 using Xunit;
-using ToDoIt.Data;
 
 namespace ToDoIt.Tests.Data
 {
@@ -28,7 +27,7 @@ namespace ToDoIt.Tests.Data
             // consume 2 id's
             int nextId = TodoSequencer.NextTodoId();
             nextId = TodoSequencer.NextTodoId();
-            
+
 
             //act
             TodoSequencer.Reset();
