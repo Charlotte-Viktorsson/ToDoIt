@@ -46,6 +46,7 @@ namespace ToDoIt.Data
             bool justLooking = true;
             int myCollectionNumber = myPeople.Length;
 
+            if (myCollectionNumber == 0) return null;
 
             while (!notFound && justLooking)
             {
