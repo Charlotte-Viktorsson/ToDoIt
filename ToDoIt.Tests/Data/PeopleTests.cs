@@ -64,6 +64,21 @@ namespace ToDoIt.Tests.Data
             Assert.Null(myLuckyPerson);
         }
 
+        [Fact]
+        public void FindById_CreateArrayButEmpty_ReturnNull()
+        {
+            //Arrange
+            PersonSequencer.reset();
+            People myPeopleCollection = new People();
+            int selectedPersonId = 3000;
+            Person myLuckyPerson;
+
+            //Act
+            myLuckyPerson = myPeopleCollection.FindById(selectedPersonId);
+
+            //Assert
+            Assert.Null(myLuckyPerson);
+        }
 
         [Fact]
         public void AddPerson_OnlyOnePersonAdd_OnlyOnePersonIn()

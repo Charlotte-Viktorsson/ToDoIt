@@ -12,7 +12,7 @@
         /// </summary>
         /// <param name="todoId">The unique Id for this ToDo task.</param>
         /// <param name="description">The description of this ToDo task.</param>
-        public ToDo(int todoId, string description)
+        public ToDo(int todoId=0, string description="")
         {
             this.todoId = todoId;
             this.description = description;

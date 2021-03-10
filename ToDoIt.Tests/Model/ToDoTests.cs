@@ -7,7 +7,7 @@ namespace ToDoIt.Tests.Model
     public class ToDoTests
     {
         [Fact]
-        public void Create_constructor_checkAllFields()
+        public void ToDo_constructor_checkAllFields()
         {
             //arrange
             string description = "baka kaka";
@@ -24,7 +24,7 @@ namespace ToDoIt.Tests.Model
         }
 
         [Fact]
-        public void ToDoTest_ConstructNoAssignee_GetAssigneeNull()
+        public void ToDo_ConstructNoAssignee_GetAssigneeNull()
         {
             //arrange
             string description = "Get to work.";
@@ -40,5 +40,86 @@ namespace ToDoIt.Tests.Model
 
         }
 
+        [Fact]
+        public void ToDo_CreateEmpty_CreatedAndIdZero()
+        {
+            //Arrange
+            ToDo myToDo = new ToDo();
+
+            //Act
+            int myToDoId = myToDo.TodoId;
+            bool ExpectedFalse = myToDoId > 0 ? true : false;
+
+            //Assert
+            Assert.NotNull(myToDo);
+            Assert.False(ExpectedFalse);
+        }
+
+
+        [Fact]
+        public void ToDo_CreateIdOne_GetIdOne()
+        {
+            //Arrange
+            ToDo myToDo = new ToDo(1, "Hello");
+            int expectedOneId = myToDo.TodoId;
+
+            //Act
+            bool expectedTrue = expectedOneId == 1 ? true : false;
+
+            //Assert
+            Assert.True(expectedTrue);
+
+        }
+
+        [Fact]
+        public void ToDo_CreateSetDescipt_GetDescript()
+        {
+            //Arrange
+            string setStringDesciption = "Go walk";
+            ToDo myToDo = null;
+            string expectedDesciption;
+
+            //Act
+            myToDo = new ToDo(1, setStringDesciption);
+            expectedDesciption = myToDo.Description;
+
+            //Assert
+            Assert.Equal(setStringDesciption, expectedDesciption);
+
+        }
+
+        [Fact]
+        public void ToDo_CreateSetAssignee_GetAssignee()
+        {
+            //Arrange
+            string setStringDesciption = "Go walk";
+            ToDo myToDo = null;
+            Person myPerson = null;
+
+            //Act
+            myPerson = new Person(1, "Charlie", "Brown");
+            myToDo = new ToDo(1, setStringDesciption);
+            myToDo.Assignee = myPerson;
+
+
+            //Assert
+            Assert.NotNull(myToDo.Assignee);
+        }
+
+        [Fact]
+        public void ToDo_CreateSetDone_GetDoneOk()
+        {
+            //Arrange
+            string setStringDesciption = "Go walk";
+            ToDo myToDo = null;
+
+            //Act
+            myToDo = new ToDo(1, setStringDesciption);
+            myToDo.Done = true;
+
+
+            //Assert
+            Assert.True(myToDo.Done);
+        }
     }
 }
