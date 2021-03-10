@@ -53,13 +53,12 @@ namespace ToDoIt.Data
                 {
                     justLooking = false;
                 }
-
-                myIndex++;
-
-                if (myIndex == myCollectionNumber)
+                else if (myIndex + 1 == myCollectionNumber)
                 {
                     notFound = true;
                 }
+
+                myIndex++;
             }
 
             if (notFound)

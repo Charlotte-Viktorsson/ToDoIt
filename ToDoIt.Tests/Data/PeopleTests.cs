@@ -19,6 +19,7 @@ namespace ToDoIt.Tests.Data
             Assert.Equal(expectedSizeOfPeople, myLengthOfPeople);
         }
 
+
         [Fact]
         public void FindById_CreatePersonsLook4One_FoundOne()
         {
@@ -42,7 +43,7 @@ namespace ToDoIt.Tests.Data
         }
 
         [Fact]
-        public void FindById_CreatePersonsLook4OneNotTHere_FoundNoone()
+        public void FindById_CreatePersonsLook4OneNotThere_FoundNoone()
         {
             //Arrange
             PersonSequencer.reset();
@@ -189,9 +190,8 @@ namespace ToDoIt.Tests.Data
 
             mySecondTotalNrPersons = myPeopleCollection.Size();
 
-
             //Assert
-            //Assert.NotEqual(myFirstTotalNrPersons, mySecondTotalNrPersons);
+
             Assert.Equal(myExpectedNrOfPersons, mySecondTotalNrPersons);
 
         }
