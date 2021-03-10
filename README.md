@@ -15,4 +15,4 @@ Please take a look at the work, and I hope you can enjoy it!
 
 
 **Short about the program:**<br>
-[a short note will be added here]
+The program has no really usage besides of us having a really good assignment and excercise. All developement of this program has been test driven and the tests is based on different scenarious that has made us make the code better. Test driven developement has taken us to, in our beleves, a faster developement pace of this code. Everything here was done by two persons in two workdays. If you would like, for some reason, to test it out the only thing right now that works is the tests. There are no interface to the Classes.
