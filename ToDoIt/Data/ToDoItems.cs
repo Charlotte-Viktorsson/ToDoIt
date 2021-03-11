@@ -5,48 +5,53 @@ using ToDoIt.Model;
 namespace ToDoIt.Data
 {
 
-    public class ToDoItems
+    public class TodoItems
     {
-        private static ToDo[] myItems;
+        private static Todo[] myItems;
 
-        public ToDoItems()
+        /// <summary>
+        /// The constructor of the todoitems allocates an empty array of Todo objects
+        /// </summary>
+        public TodoItems()
         {
-            myItems = new ToDo[0];
+            myItems = new Todo[0];
         }
 
         /// <summary>
         /// Size returns the size of the Array collection.
         /// </summary>
-        /// <returns>int size</returns>
+        /// <returns>Returns an int representing number of items</returns>
         public int Size()
         {
             return myItems.Length;
         }
 
         /// <summary>
-        /// returns all items
+        /// FindAll returns all todo items
         /// </summary>
-        /// <returns>ToDo[]</returns>
-        public ToDo[] FindAll()
+        /// <returns>Returns the collection of Todo's</returns>
+        public Todo[] FindAll()
         {
             return myItems;
         }
 
         /// <summary>
-        /// Method creates a new ToDo item, assignes it to the Assignee if any.
-        /// The new ToDo item is then inserted into the items list and finally returned.
+        /// Method creates a new Todo item, assignes it to the Assignee if any.
+        /// The new Todo item is then inserted into the items list and finally returned.
         /// </summary>
-        /// <param name="assignee"></param>
-        /// <param name="description"></param>
-        /// <returns>Returns the object of the created ToDo item</returns>
-        public ToDo AddToDoItem(Person assignee, string description)
+        /// <param name="assignee">Either a Person object or null if not yet assigned</param>
+        /// <param name="description">The desription of the Todo.</param>
+        /// <returns>Returns the object of the created Todo item</returns>
+        public Todo AddToDoItem(Person assignee, string description)
         {
-            int nextItemId = TodoSequencer.NextTodoId();
+            int nextItemId = TodoSequencer.nextTodoId();
 
-            ToDo newTodo = new ToDo(nextItemId, description);
-            newTodo.Assignee = assignee;
+            Todo newTodo = new Todo(nextItemId, description)
+            {
+                Assignee = assignee
+            };
 
-            //extend array by one.
+            //extend array by one and insert new todo last.
             int arrayLength = this.Size();
             Array.Resize(ref myItems, arrayLength + 1);
             myItems[arrayLength] = newTodo;
@@ -55,11 +60,11 @@ namespace ToDoIt.Data
         }
 
         /// <summary>
-        /// The method returns the ToDo item with the requested Id
+        /// The method returns the Todo item with the requested Id
         /// </summary>
-        /// <param name="todoId">The unique ToDo identification number.</param>
-        /// <returns>Returns the ToDo item if found. Otherwise returns null.</returns>
-        public ToDo FindById(int todoId)
+        /// <param name="todoId">The unique Todo identification number.</param>
+        /// <returns>Returns the Todo item if found. Otherwise returns null.</returns>
+        public Todo FindById(int todoId)
         {
             int returnIndex = -1;
 
@@ -78,22 +83,27 @@ namespace ToDoIt.Data
             {
                 return null;
             }
-
         }
 
         /// <summary>
-        /// The method creates a new empty list of ToDo items.
+        /// The method creates a new empty list of Todo items.
         /// </summary>
         public void Clear()
         {
-            myItems = new ToDo[0];
+            myItems = new Todo[0];
+            TodoSequencer.reset();
         }
 
-        public ToDo[] FindByDoneStatus(bool doneStatus)
+        /// <summary>
+        /// Finds all TodoItems that has the provided doneStatus.
+        /// </summary>
+        /// <param name="doneStatus">The doneStatus to filter on</param>
+        /// <returns>Returns all Todo items in the wanted status or an empty array.</returns>
+        public Todo[] FindByDoneStatus(bool doneStatus)
         {
 
-            ToDo[] returnArray = new ToDo[0];
-            List<ToDo> returnList = new List<ToDo>();
+            Todo[] returnArray = new Todo[0];
+            List<Todo> returnList = new List<Todo>();
 
 
             for (int i = 0; i < myItems.Length; i++)
@@ -109,18 +119,15 @@ namespace ToDoIt.Data
             return returnArray;
         }
 
-
         /// <summary>
-        /// Finds all ToDo items by the assigned person based on the personal Id.
+        /// Finds all Todo items by the assigned person based on the personal Id.
         /// </summary>
-        /// <param name="personId">The unique Id of a person in the array collection.</param>
-        /// <returns>Returns all ToDo items assigned to the specified person in an Array.
+        /// <param name="personId">The unique Id of an assigned Person</param>
+        /// <returns>Returns all Todo items assigned to the specified person in an Array.
         /// If person do not have assignment the return array is empty.</returns>
-        public ToDo[] FindByAssignee(int personId)
+        public Todo[] FindByAssignee(int personId)
         {
-            ToDo[] returnArray = new ToDo[0];
-            List<ToDo> returnList = new List<ToDo>();
-
+            Todo[] returnArray = new Todo[0];
 
             for (int i = 0; i < myItems.Length; i++)
             {
@@ -137,16 +144,14 @@ namespace ToDoIt.Data
         }
 
         /// <summary>
-        /// Finds all ToDo items by the assigned person based on the personal object.
+        /// Finds all Todo items by the assigned person based on the personal object.
         /// </summary>
         /// <param name="assignee">The person input is an object of Person contained in the collection.</param>
-        /// <returns>Returns all ToDo items assigned to the specified person in an Array.
+        /// <returns>Returns all Todo items assigned to the specified person in an Array.
         /// If person do not have assignment the return array is empty.</returns>
-        public ToDo[] FindByAssignee(Person assignee)
+        public Todo[] FindByAssignee(Person assignee)
         {
-            ToDo[] returnArray = new ToDo[0];
-            List<ToDo> returnList = new List<ToDo>();
-
+            Todo[] returnArray = new Todo[0];
 
             for (int i = 0; i < myItems.Length; i++)
             {
@@ -162,15 +167,13 @@ namespace ToDoIt.Data
         }
 
         /// <summary>
-        /// Looks upp all the ToDo items that are not assigned.
+        /// Looks upp all the Todo items that are not assigned.
         /// </summary>
         /// <returns>Returns an Array of unassigned ToDos. If no unassigned
         /// ToDos is found the returned Array is empty.</returns>
-        public ToDo[] FindUnassignedTodoItems()
+        public Todo[] FindUnassignedTodoItems()
         {
-            ToDo[] returnArray = new ToDo[0];
-            List<ToDo> returnList = new List<ToDo>();
-
+            Todo[] returnArray = new Todo[0];
 
             for (int i = 0; i < myItems.Length; i++)
             {
@@ -186,12 +189,12 @@ namespace ToDoIt.Data
         }
 
         /// <summary>
-        /// Remove takes one specified object of ToDo out of the Array
-        /// collection and resizes the remainding Array acordingly.
+        /// Remove takes one specified object of Todo out of the Array
+        /// collection and resizes the remaining Array accordingly.
         /// </summary>
-        /// <param name="myToDo">The ToDo object to remove from Array
-        /// Collection. If not found notheing will happen.</param>
-        public void Remove(ToDo myToDo)
+        /// <param name="myToDo">The Todo object to remove from Array
+        /// Collection. If not found nothing will happen.</param>
+        public void Remove(Todo myToDo)
         {
             int myToDoCollection = myItems.Length;
             int myIndexedToDo = -1;

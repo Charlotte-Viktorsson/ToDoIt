@@ -16,7 +16,7 @@ namespace ToDoIt.Data
         }
 
         /// <summary>
-        /// Size gives you the number of persons in the collecction.
+        /// Size gives you the number of persons in the collection.
         /// </summary>
         /// <returns>Returns an int representing the number of persons in the collection.</returns>
         public int Size()
@@ -69,13 +69,8 @@ namespace ToDoIt.Data
             else
             {
                 return myPeople[myIndex - 1];
-
             }
-
         }
-
-
-
 
         /// <summary>
         /// AddPerson creates a new person and inserts it into the existing array of

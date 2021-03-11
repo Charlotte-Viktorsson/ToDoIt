@@ -1,6 +1,6 @@
 ﻿namespace ToDoIt.Model
 {
-    public class ToDo
+    public class Todo
     {
         readonly int todoId;
         string description;
@@ -8,19 +8,20 @@
         Person assignee;
 
         /// <summary>
-        /// A constructor method for create a new ToDo.
+        /// A constructor method for create a new Todo.
         /// </summary>
-        /// <param name="todoId">The unique Id for this ToDo task.</param>
-        /// <param name="description">The description of this ToDo task.</param>
-        public ToDo(int todoId=0, string description="")
+        /// <param name="todoId">The unique Id for this Todo task.</param>
+        /// <param name="description">The description of this Todo task.</param>
+        public Todo(int todoId=0, string description="")
         {
             this.todoId = todoId;
             this.description = description;
             this.done = false;
+            this.assignee = null;
         }
 
         /// <summary>
-        /// A get for the unique Id of this ToDo task.
+        /// A get for the unique Id of this Todo task.
         /// </summary>
         public int TodoId
         {
@@ -28,7 +29,7 @@
         }
 
         /// <summary>
-        /// A get for the descriptiton of this ToDo task
+        /// A get for the description of this Todo task
         /// </summary>
         public string Description
         {
@@ -37,7 +38,7 @@
         }
 
         /// <summary>
-        /// A marker of the ToDo task done or not done.
+        /// A marker of the Todo task done or not done.
         /// </summary>
         public bool Done
         {
@@ -46,7 +47,7 @@
         }
 
         /// <summary>
-        /// A get for the person that is assigned to the ToDo task.
+        /// A get for the person that is assigned to the Todo task.
         /// </summary>
         public Person Assignee
         {

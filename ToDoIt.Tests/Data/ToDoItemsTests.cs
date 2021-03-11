@@ -14,8 +14,8 @@ namespace ToDoIt.Tests.Data
             int expectedSizeOfToDoItems = 0;
             string description = "Tvätta kläder";
 
-            ToDoItems todoItems = new ToDoItems();
-            ToDo returnedTodo = todoItems.AddToDoItem(null, description);
+            TodoItems todoItems = new TodoItems();
+            Todo returnedTodo = todoItems.AddToDoItem(null, description);
             Assert.Equal(1, todoItems.Size());
 
             //act
@@ -37,10 +37,10 @@ namespace ToDoIt.Tests.Data
 
             int expectedSizeOfToDoItems = 1;
             string description = "Tvätta bilen";
-            ToDoItems todoItems = new ToDoItems();
+            TodoItems todoItems = new TodoItems();
 
             //act
-            ToDo returnedTodo = todoItems.AddToDoItem(assignee, description);
+            Todo returnedTodo = todoItems.AddToDoItem(assignee, description);
 
             //assert
             Assert.Equal(expectedSizeOfToDoItems, todoItems.Size());
@@ -55,11 +55,11 @@ namespace ToDoIt.Tests.Data
 
             int expectedSizeOfToDoItems = 1;
             string description = "Handla mat";
-            ToDoItems todoItems = new ToDoItems();
+            TodoItems todoItems = new TodoItems();
             todoItems.Clear();
 
             //act
-            ToDo returnedTodo = todoItems.AddToDoItem(assignee, description);
+            Todo returnedTodo = todoItems.AddToDoItem(assignee, description);
 
             //assert
             Assert.Equal(expectedSizeOfToDoItems, todoItems.Size());
@@ -80,7 +80,7 @@ namespace ToDoIt.Tests.Data
             string description2 = "Dammsuga";
             string description3 = "Putsa fönster";
 
-            ToDoItems todoItems = new ToDoItems();
+            TodoItems todoItems = new TodoItems();
             todoItems.Clear();
 
             //add 3 items
@@ -89,7 +89,7 @@ namespace ToDoIt.Tests.Data
             todoItems.AddToDoItem(null, description3);
 
             //act
-            ToDo[] itemArray = todoItems.FindAll();
+            Todo[] itemArray = todoItems.FindAll();
 
             //assert
             Assert.Equal(expectedSizeOfToDoItems, itemArray.Length);
@@ -107,8 +107,8 @@ namespace ToDoIt.Tests.Data
             string description1 = "Gå ut med hunden";
             string description2 = "Kela med katten";
 
-            TodoSequencer.Reset();
-            ToDoItems todoItems = new ToDoItems();
+            TodoSequencer.reset();
+            TodoItems todoItems = new TodoItems();
             todoItems.Clear();
 
             //add 2 items
@@ -117,7 +117,7 @@ namespace ToDoIt.Tests.Data
             int size = todoItems.Size();
 
             //act
-            ToDo foundItem = todoItems.FindById(size);
+            Todo foundItem = todoItems.FindById(size);
 
             //assert
             Assert.Equal(description2, foundItem.Description);
@@ -135,8 +135,8 @@ namespace ToDoIt.Tests.Data
             string description1 = "Gå ut med hunden";
             string description2 = "Kela med katten";
 
-            TodoSequencer.Reset();
-            ToDoItems todoItems = new ToDoItems();
+            TodoSequencer.reset();
+            TodoItems todoItems = new TodoItems();
             todoItems.Clear();
 
             //add 2 items
@@ -144,11 +144,11 @@ namespace ToDoIt.Tests.Data
             todoItems.AddToDoItem(assignee, description2);
 
             //set one item to done.
-            ToDo itemToBeDone = todoItems.FindById(1);
+            Todo itemToBeDone = todoItems.FindById(1);
             itemToBeDone.Done = true;
 
             //act
-            ToDo[] foundItemsArray = todoItems.FindByDoneStatus(true);
+            Todo[] foundItemsArray = todoItems.FindByDoneStatus(true);
 
             //assert
             Assert.Single(foundItemsArray);
@@ -168,8 +168,8 @@ namespace ToDoIt.Tests.Data
             string description2 = "Kela med katten";
             string description3 = "Promenera";
 
-            TodoSequencer.Reset();
-            ToDoItems todoItems = new ToDoItems();
+            TodoSequencer.reset();
+            TodoItems todoItems = new TodoItems();
             todoItems.Clear();
 
             //add 3 items
@@ -178,11 +178,11 @@ namespace ToDoIt.Tests.Data
             todoItems.AddToDoItem(assignee, description3);
 
             //set one item to done.
-            ToDo itemToBeDone = todoItems.FindById(1);
+            Todo itemToBeDone = todoItems.FindById(1);
             itemToBeDone.Done = true;
 
             //act
-            ToDo[] foundItemsArray = todoItems.FindByDoneStatus(false);
+            Todo[] foundItemsArray = todoItems.FindByDoneStatus(false);
 
             //assert
             Assert.Equal(2, foundItemsArray.Length);
@@ -202,8 +202,8 @@ namespace ToDoIt.Tests.Data
             string description2 = "Kela med katten";
             string description3 = "Promenera";
 
-            TodoSequencer.Reset();
-            ToDoItems todoItems = new ToDoItems();
+            TodoSequencer.reset();
+            TodoItems todoItems = new TodoItems();
             todoItems.Clear();
 
             //add 3 items
@@ -212,7 +212,7 @@ namespace ToDoIt.Tests.Data
             todoItems.AddToDoItem(null, description3);
 
             //act
-            ToDo[] foundItemsArray = todoItems.FindByAssignee(personId);
+            Todo[] foundItemsArray = todoItems.FindByAssignee(personId);
 
             //assert
             Assert.Equal(2, foundItemsArray.Length);
@@ -234,8 +234,8 @@ namespace ToDoIt.Tests.Data
             string description2 = "Kela med katten";
             string description3 = "Promenera";
 
-            TodoSequencer.Reset();
-            ToDoItems todoItems = new ToDoItems();
+            TodoSequencer.reset();
+            TodoItems todoItems = new TodoItems();
             todoItems.Clear();
 
             //add 3 items
@@ -244,7 +244,7 @@ namespace ToDoIt.Tests.Data
             todoItems.AddToDoItem(null, description3);
 
             //act
-            ToDo[] foundItemsArray = todoItems.FindByAssignee(assignee);
+            Todo[] foundItemsArray = todoItems.FindByAssignee(assignee);
 
             //assert
             Assert.Single(foundItemsArray);
@@ -266,8 +266,8 @@ namespace ToDoIt.Tests.Data
             string description2 = "Kela med katten";
             string description3 = "Promenera";
 
-            TodoSequencer.Reset();
-            ToDoItems todoItems = new ToDoItems();
+            TodoSequencer.reset();
+            TodoItems todoItems = new TodoItems();
             todoItems.Clear();
 
             //add 3 items
@@ -276,7 +276,7 @@ namespace ToDoIt.Tests.Data
             todoItems.AddToDoItem(null, description3);
 
             //act
-            ToDo[] foundItemsArray = todoItems.FindUnassignedTodoItems();
+            Todo[] foundItemsArray = todoItems.FindUnassignedTodoItems();
 
             //assert
             Assert.Single(foundItemsArray);
@@ -289,15 +289,15 @@ namespace ToDoIt.Tests.Data
         {
             //arrange
 
-            ToDo myToDo = null;
+            Todo myToDo = null;
             string description1 = "Gå ut med hunden";
             string description2 = "Kela med katten";
             string description3 = "Promenera";
             string description4 = "Läxor";
             int expectedNumberOfItems = 3;
 
-            TodoSequencer.Reset();
-            ToDoItems todoItems = new ToDoItems();
+            TodoSequencer.reset();
+            TodoItems todoItems = new TodoItems();
             todoItems.Clear();
 
             //add 4 items
@@ -323,15 +323,15 @@ namespace ToDoIt.Tests.Data
         {
             //arrange
 
-            ToDo myToDo = null;
+            Todo myToDo = null;
             string description1 = "Gå ut med hunden";
             string description2 = "Kela med katten";
             string description3 = "Promenera";
             string description4 = "Läxor";
             int expectedNumberOfItems = 4;
 
-            TodoSequencer.Reset();
-            ToDoItems todoItems = new ToDoItems();
+            TodoSequencer.reset();
+            TodoItems todoItems = new TodoItems();
             todoItems.Clear();
 
             //add 4 items
@@ -341,7 +341,7 @@ namespace ToDoIt.Tests.Data
             todoItems.AddToDoItem(null, description3);
             todoItems.AddToDoItem(null, description4);
 
-            myToDo = new ToDo(0, "Självdö");
+            myToDo = new Todo(0, "Självdö");
 
             //act
             todoItems.Remove(myToDo);

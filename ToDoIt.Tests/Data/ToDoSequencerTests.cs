@@ -9,10 +9,10 @@ namespace ToDoIt.Tests.Data
         public void NextTodoId_getNextTodoId_id()
         {
             //arrange
-            TodoSequencer.Reset();
+            TodoSequencer.reset();
             int expectedNextId = 1;
             //act
-            int nextId = TodoSequencer.NextTodoId();
+            int nextId = TodoSequencer.nextTodoId();
 
             //assert
             Assert.Equal(expectedNextId, nextId);
@@ -22,16 +22,16 @@ namespace ToDoIt.Tests.Data
         public void Reset_ResetId_NextToDoId()
         {
             //arrange
-            TodoSequencer.Reset();
+            TodoSequencer.reset();
             int expectedResetId = 1;
             // consume 2 id's
-            int nextId = TodoSequencer.NextTodoId();
-            nextId = TodoSequencer.NextTodoId();
+            int nextId = TodoSequencer.nextTodoId();
+            nextId = TodoSequencer.nextTodoId();
 
 
             //act
-            TodoSequencer.Reset();
-            int newId = TodoSequencer.NextTodoId();
+            TodoSequencer.reset();
+            int newId = TodoSequencer.nextTodoId();
 
             //assert
             Assert.NotEqual(nextId, newId);

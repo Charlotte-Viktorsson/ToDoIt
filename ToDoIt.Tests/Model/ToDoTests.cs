@@ -14,7 +14,7 @@ namespace ToDoIt.Tests.Model
             int id = 1;
 
             //act
-            ToDo todo1 = new ToDo(id, description);
+            Todo todo1 = new Todo(id, description);
 
             //assert
             Assert.Equal(description, todo1.Description);
@@ -32,7 +32,7 @@ namespace ToDoIt.Tests.Model
             Person expectedPerson = null;
 
             //act
-            ToDo todo1 = new ToDo(id, description);
+            Todo todo1 = new Todo(id, description);
             Person myAssignedPerson = todo1.Assignee;
 
             //assert
@@ -44,7 +44,7 @@ namespace ToDoIt.Tests.Model
         public void ToDo_CreateEmpty_CreatedAndIdZero()
         {
             //Arrange
-            ToDo myToDo = new ToDo();
+            Todo myToDo = new Todo();
 
             //Act
             int myToDoId = myToDo.TodoId;
@@ -60,7 +60,7 @@ namespace ToDoIt.Tests.Model
         public void ToDo_CreateIdOne_GetIdOne()
         {
             //Arrange
-            ToDo myToDo = new ToDo(1, "Hello");
+            Todo myToDo = new Todo(1, "Hello");
             int expectedOneId = myToDo.TodoId;
 
             //Act
@@ -76,11 +76,11 @@ namespace ToDoIt.Tests.Model
         {
             //Arrange
             string setStringDesciption = "Go walk";
-            ToDo myToDo = null;
+            Todo myToDo = null;
             string expectedDesciption;
 
             //Act
-            myToDo = new ToDo(1, setStringDesciption);
+            myToDo = new Todo(1, setStringDesciption);
             expectedDesciption = myToDo.Description;
 
             //Assert
@@ -93,12 +93,12 @@ namespace ToDoIt.Tests.Model
         {
             //Arrange
             string setStringDesciption = "Go walk";
-            ToDo myToDo = null;
+            Todo myToDo = null;
             Person myPerson = null;
 
             //Act
             myPerson = new Person(1, "Charlie", "Brown");
-            myToDo = new ToDo(1, setStringDesciption);
+            myToDo = new Todo(1, setStringDesciption);
             myToDo.Assignee = myPerson;
 
 
@@ -111,10 +111,10 @@ namespace ToDoIt.Tests.Model
         {
             //Arrange
             string setStringDesciption = "Go walk";
-            ToDo myToDo = null;
+            Todo myToDo = null;
 
             //Act
-            myToDo = new ToDo(1, setStringDesciption);
+            myToDo = new Todo(1, setStringDesciption);
             myToDo.Done = true;
 
 
