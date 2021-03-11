@@ -103,8 +103,6 @@ namespace ToDoIt.Data
         {
 
             Todo[] returnArray = new Todo[0];
-            List<Todo> returnList = new List<Todo>();
-
 
             for (int i = 0; i < myItems.Length; i++)
             {

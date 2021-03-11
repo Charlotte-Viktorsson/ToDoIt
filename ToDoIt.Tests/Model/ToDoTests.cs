@@ -7,7 +7,7 @@ namespace ToDoIt.Tests.Model
     public class ToDoTests
     {
         [Fact]
-        public void ToDo_constructor_checkAllFields()
+        public void Todo_Constructor_checkAllFields()
         {
             //arrange
             string description = "baka kaka";
@@ -16,7 +16,7 @@ namespace ToDoIt.Tests.Model
             //act
             Todo todo1 = new Todo(id, description);
 
-            //assert
+            //assert all fields
             Assert.Equal(description, todo1.Description);
             Assert.False(todo1.Done);
             Assert.Equal(id, todo1.TodoId);
@@ -24,12 +24,12 @@ namespace ToDoIt.Tests.Model
         }
 
         [Fact]
-        public void ToDo_ConstructNoAssignee_GetAssigneeNull()
+        public void Todo_ConstructNoAssignee_GetAssigneeNull()
         {
             //arrange
             string description = "Get to work.";
             int id = 1;
-            Person expectedPerson = null;
+            Person expectedPerson = null; //= unassigned
 
             //act
             Todo todo1 = new Todo(id, description);
@@ -37,86 +37,125 @@ namespace ToDoIt.Tests.Model
 
             //assert
             Assert.Equal(expectedPerson, myAssignedPerson);
-
         }
 
         [Fact]
-        public void ToDo_CreateEmpty_CreatedAndIdZero()
+        public void Todo_ConstructNullDescription_EmptyDescription()
+        {
+            //arrange
+            string description = null;
+            int id = 1;
+
+            //act
+            Todo todo1 = new Todo(id, description);
+
+            //assert
+            Assert.Equal("", todo1.Description);
+        }
+
+        [Fact]
+        public void Todo_CreateEmpty_UsedDefaultValues()
         {
             //Arrange
-            Todo myToDo = new Todo();
-
+            int expectedDefaultId = 0;
+            string expectedDefaultString = "";
+            
             //Act
+            Todo myToDo = new Todo();
             int myToDoId = myToDo.TodoId;
-            bool ExpectedFalse = myToDoId > 0 ? true : false;
 
             //Assert
             Assert.NotNull(myToDo);
-            Assert.False(ExpectedFalse);
-        }
-
-
-        [Fact]
-        public void ToDo_CreateIdOne_GetIdOne()
-        {
-            //Arrange
-            Todo myToDo = new Todo(1, "Hello");
-            int expectedOneId = myToDo.TodoId;
-
-            //Act
-            bool expectedTrue = expectedOneId == 1 ? true : false;
-
-            //Assert
-            Assert.True(expectedTrue);
-
+            Assert.Equal(expectedDefaultId, myToDoId);
+            Assert.Equal(expectedDefaultString, myToDo.Description);
         }
 
         [Fact]
-        public void ToDo_CreateSetDescipt_GetDescript()
+        public void Todo_CreateSetDescript_GetDescript()
         {
             //Arrange
-            string setStringDesciption = "Go walk";
+            string setStringDescription = "Go walk";
             Todo myToDo = null;
-            string expectedDesciption;
+            string expectedDescription;
 
             //Act
-            myToDo = new Todo(1, setStringDesciption);
-            expectedDesciption = myToDo.Description;
+            myToDo = new Todo(1, setStringDescription);
+            expectedDescription = myToDo.Description;
 
             //Assert
-            Assert.Equal(setStringDesciption, expectedDesciption);
-
+            Assert.Equal(setStringDescription, expectedDescription);
         }
 
         [Fact]
-        public void ToDo_CreateSetAssignee_GetAssignee()
+        public void Todo_ChangeDescript_GetDescript()
         {
             //Arrange
-            string setStringDesciption = "Go walk";
+            string originalDescription = "Run home";
+            string setStringDescription = "Go walk";
+            string constructedDescription;
+            string changedDescription;
+
+            //Act
+            
+            Todo myToDo = new Todo(1, originalDescription);
+            constructedDescription = myToDo.Description;
+            //change description
+            myToDo.Description = setStringDescription;
+            changedDescription = myToDo.Description;
+
+            //Assert
+            Assert.Equal(originalDescription, constructedDescription);
+            Assert.Equal(setStringDescription, changedDescription);
+        }
+
+        [Fact]
+        public void Todo_ChangeDescriptToNull_GetDescript()
+        {
+            //Arrange
+            string originalDescription = "Run home";
+            string setStringDescription = null;
+            string constructedDescription;
+            string changedDescription;
+            string expectedChangedDescription = "";
+
+            //Act
+            Todo myToDo = new Todo(1, originalDescription);
+            constructedDescription = myToDo.Description;
+            //change description
+            myToDo.Description = setStringDescription;
+            changedDescription = myToDo.Description;
+
+            //Assert
+            Assert.Equal(originalDescription, constructedDescription);
+            Assert.Equal(expectedChangedDescription, changedDescription);
+        }
+
+        [Fact]
+        public void Todo_CreateSetAssignee_GetAssignee()
+        {
+            //Arrange
+            string setStringDescription = "Go walk";
             Todo myToDo = null;
             Person myPerson = null;
 
             //Act
             myPerson = new Person(1, "Charlie", "Brown");
-            myToDo = new Todo(1, setStringDesciption);
+            myToDo = new Todo(1, setStringDescription);
             myToDo.Assignee = myPerson;
-
 
             //Assert
             Assert.NotNull(myToDo.Assignee);
         }
 
         [Fact]
-        public void ToDo_CreateSetDone_GetDoneOk()
+        public void Todo_CreateSetDone_GetDoneOk()
         {
             //Arrange
-            string setStringDesciption = "Go walk";
-            Todo myToDo = null;
+            string setStringDescription = "Go walk";
 
             //Act
-            myToDo = new Todo(1, setStringDesciption);
+            Todo myToDo = new Todo(1, setStringDescription);
             myToDo.Done = true;
-
 
             //Assert
             Assert.True(myToDo.Done);

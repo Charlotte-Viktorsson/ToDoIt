@@ -14,6 +14,10 @@
         /// <param name="description">The description of this Todo task.</param>
         public Todo(int todoId=0, string description="")
         {
+            if (description == null)
+            {
+                description = "";
+            }
             this.todoId = todoId;
             this.description = description;
             this.done = false;
@@ -26,15 +30,25 @@
         public int TodoId
         {
             get { return todoId; }
+            //since todoId is readonly, it can't be changed
         }
 
         /// <summary>
-        /// A get for the description of this Todo task
+        /// Methods for the description of this Todo task
         /// </summary>
         public string Description
         {
             get { return description; }
-            set { description = value; }
+            set {
+                if (value == null)
+                {
+                    description = "";
+                }
+                else
+                {
+                    description = value;
+                }
+            }
         }
 
         /// <summary>
@@ -47,7 +61,8 @@
         }
 
         /// <summary>
-        /// A get for the person that is assigned to the Todo task.
+        /// Methods for the person that is assigned to the Todo task.
+        /// For an unassigned Todo, assignee can be set to null
         /// </summary>
         public Person Assignee
         {

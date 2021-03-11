@@ -3,7 +3,7 @@ using Xunit;
 
 namespace ToDoIt.Tests.Data
 {
-    public class ToDoSequencerTests
+    public class TodoSequencerTests
     {
         [Fact]
         public void NextTodoId_getNextTodoId_id()
