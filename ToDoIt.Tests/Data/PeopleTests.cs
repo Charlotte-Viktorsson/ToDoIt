@@ -234,5 +234,29 @@ namespace ToDoIt.Tests.Data
             //Assert
             Assert.Equal(myExpectedNrOfPersons, mySecondTotalNrPersons);
         }
+
+        [Fact]
+        public void Remove_RemoveNull_NothingRemovedNoCrash()
+        {
+            //Arrange
+            PersonSequencer.reset();
+            People myPeopleCollection = null;
+            int mySecondTotalNrPersons = 0;
+            int myExpectedNrOfPersons = 4;
+
+            myPeopleCollection = new People();
+            myPeopleCollection.AddPerson("Abel", "Jonsson");
+            myPeopleCollection.AddPerson("Ronja", "Axelsson");
+            myPeopleCollection.AddPerson("Gottfrid", "Larsson");
+            myPeopleCollection.AddPerson("Sahara", "Hotnight");
+            
+
+            //Act
+            myPeopleCollection.Remove(null);
+            mySecondTotalNrPersons = myPeopleCollection.Size();
+
+            //Assert
+            Assert.Equal(myExpectedNrOfPersons, mySecondTotalNrPersons);
+        }
     }
 }
