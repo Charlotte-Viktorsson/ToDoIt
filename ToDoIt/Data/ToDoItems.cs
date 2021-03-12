@@ -197,34 +197,35 @@ namespace ToDoIt.Data
             int myToDoCollection = myItems.Length;
             int myIndexedToDo = -1;
             bool notDoneYet = true;
-
-            int myLoop = 0;
-            while (notDoneYet)
-            {
-
-                if (myItems[myLoop].TodoId == myToDo.TodoId)
+            if(myToDo != null)
+            { 
+                int myLoop = 0;
+                while (notDoneYet)
                 {
-                    myIndexedToDo = myLoop;
-                    notDoneYet = false;
-                }
-                myLoop++;
 
-                if (myLoop == myToDoCollection)
-                {
-                    notDoneYet = false;
-                }
-            }
+                    if (myItems[myLoop].TodoId == myToDo.TodoId)
+                    {
+                        myIndexedToDo = myLoop;
+                        notDoneYet = false;
+                    }
+                    myLoop++;
 
-            if (myIndexedToDo != -1)
-            {
-                for (int removeLoop = myIndexedToDo; removeLoop < myToDoCollection - 1; removeLoop++)
-                {
-                    myItems[removeLoop] = myItems[removeLoop + 1];
+                    if (myLoop == myToDoCollection)
+                    {
+                        notDoneYet = false;
+                    }
                 }
 
-                Array.Resize(ref myItems, myToDoCollection - 1);
+                if (myIndexedToDo != -1)
+                {
+                    for (int removeLoop = myIndexedToDo; removeLoop < myToDoCollection - 1; removeLoop++)
+                    {
+                        myItems[removeLoop] = myItems[removeLoop + 1];
+                    }
+
+                    Array.Resize(ref myItems, myToDoCollection - 1);
+                }
             }
         }
-
     }
 }
