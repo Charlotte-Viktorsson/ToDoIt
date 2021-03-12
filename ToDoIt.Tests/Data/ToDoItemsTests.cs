@@ -119,7 +119,7 @@ namespace ToDoIt.Tests.Data
         {
             //arrange
             TodoItems todoItems = new TodoItems();
-            todoItems.Clear();  
+            todoItems.Clear();
 
             //act
             Todo[] itemArray = todoItems.FindAll();
@@ -180,8 +180,8 @@ namespace ToDoIt.Tests.Data
             int size = todoItems.Size();
 
             //act
-            Todo foundItem = todoItems.FindById(size+3);
-            
+            Todo foundItem = todoItems.FindById(size + 3);
+
             //assert
             Assert.Null(foundItem);
         }
@@ -332,7 +332,7 @@ namespace ToDoIt.Tests.Data
             todoItems.AddToDoItem(null, description3);
 
             //act
-            Todo[] foundItemsArray = todoItems.FindByAssignee(personId+10);
+            Todo[] foundItemsArray = todoItems.FindByAssignee(personId + 10);
 
             //assert
             Assert.Empty(foundItemsArray);
@@ -385,7 +385,7 @@ namespace ToDoIt.Tests.Data
             Person assignee2 = new Person(personId, "Klara", familyName);
 
             Person assignee3 = null;
-            
+
             string description1 = "Gå ut med hunden";
             string description2 = "Kela med katten";
             string description3 = "Promenera";
@@ -428,7 +428,7 @@ namespace ToDoIt.Tests.Data
             todoItems.AddToDoItem(null, description1);
             todoItems.AddToDoItem(null, description2);
             todoItems.AddToDoItem(null, description3);
-            
+
             //act
             Todo[] foundItemsArray = todoItems.FindUnassignedTodoItems();
 
@@ -553,6 +553,35 @@ namespace ToDoIt.Tests.Data
             todoItems.AddToDoItem(null, description4);
 
             myToDo = new Todo(0, "Not added todo");
+
+            //act
+            todoItems.Remove(myToDo);
+            int myAdjustedNumber = todoItems.Size();
+
+            //assert
+            Assert.Equal(myAdjustedNumber, expectedNumberOfItems);
+        }
+
+        [Fact]
+        public void Remove_RemoveNull_NothingRemovedNoCrash()
+        {
+            //arrange
+            Todo myToDo = null;
+            string description1 = "Gå ut med hunden";
+            string description2 = "Kela med katten";
+            string description3 = "Promenera";
+            string description4 = "Läxor";
+            int expectedNumberOfItems = 4;
+
+            TodoSequencer.reset();
+            TodoItems todoItems = new TodoItems();
+            todoItems.Clear();
+
+            //add 4 items
+            todoItems.AddToDoItem(null, description1);
+            todoItems.AddToDoItem(null, description2);
+            todoItems.AddToDoItem(null, description3);
+            todoItems.AddToDoItem(null, description4);
 
             //act
             todoItems.Remove(myToDo);
