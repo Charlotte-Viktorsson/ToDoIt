@@ -54,7 +54,7 @@ namespace ToDoIt.Data
                 {
                     //finish the loop if we find the person
                     justLooking = false;
-                    
+
                 }
                 else if (myIndex + 1 == myCollectionNumber)
                 {
@@ -116,25 +116,29 @@ namespace ToDoIt.Data
             bool notDone = true;
             int myLoop = 0;
 
-            do
+            if (myPerson != null)
             {
-                if (myPeople[myLoop].PersonId == myPerson.PersonId)
-                {
-                    notDone = false;
-                    myIndexedPerson = myLoop;
-                }
-                myLoop++;
-                if (myLoop == myPeopleCollection) notDone = false;
 
-            } while (notDone);
-
-            if (myIndexedPerson > -1)
-            {
-                for (int removeLoop = myIndexedPerson; removeLoop < myPeopleCollection - 1; removeLoop++)
+                do
                 {
-                    myPeople[removeLoop] = myPeople[removeLoop + 1];
+                    if (myPeople[myLoop].PersonId == myPerson.PersonId)
+                    {
+                        notDone = false;
+                        myIndexedPerson = myLoop;
+                    }
+                    myLoop++;
+                    if (myLoop == myPeopleCollection) notDone = false;
+
+                } while (notDone);
+
+                if (myIndexedPerson > -1)
+                {
+                    for (int removeLoop = myIndexedPerson; removeLoop < myPeopleCollection - 1; removeLoop++)
+                    {
+                        myPeople[removeLoop] = myPeople[removeLoop + 1];
+                    }
+                    Array.Resize(ref myPeople, myPeopleCollection - 1);
                 }
-                Array.Resize(ref myPeople, myPeopleCollection - 1);
             }
         }
     }
